@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8080;
 app.use(express.static(path.join(__dirname, 'dist/gerenciamento-processos')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/gerenciamento-processos/brownser/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/gerenciamento-processos/browser/index.html'));
 });
 
 app.listen(PORT, () => {

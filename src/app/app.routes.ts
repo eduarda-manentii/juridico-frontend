@@ -10,21 +10,22 @@ import { ShowPartiesInvoledComponent } from './features/parties-involved/pages/s
 import { ShowProceduralProgressComponent } from './features/procedural-progress/pages/show-procedural-progress/show-procedural-progress.component';
 import { ShowProcessComponent } from './features/process/pages/show-process/show-process.component';
 import { HomeComponent } from './features/home/pages/home/home.component';
+import { AuthGuard } from './core/services/auth-guard.service';
 
 export const routes: Routes = [
   { path: '',                                    redirectTo: 'login', pathMatch: 'full' },
   { path : "login",                              component: LoginComponentComponent },
-  { path : "process/new",                        component: NewProcessComponent },
-  { path : "process/show/:id",                   component: ShowProcessComponent },
-  { path : "process/edit/:id",                   component: NewProcessComponent },
-  { path : "process/index",                      component: IndexProcessComponent  },
-  { path : "parties_involved/new",               component: NewPartiesInvoledComponent },
-  { path : "parties_involved/show/:id",          component: ShowPartiesInvoledComponent },
-  { path : "parties_involved/edit/:id",          component: NewPartiesInvoledComponent },
-  { path : "parties_involved/index",             component: IndexPartiesInvoledComponent  },
-  { path : "procedural_progress/new",            component: NewProceduralProgressComponent },
-  { path : "procedural_progress/show/:id",       component: ShowProceduralProgressComponent },
-  { path : "procedural_progress/edit/:id",       component: NewProceduralProgressComponent },
-  { path : "procedural_progress/index",          component: IndexProceduralProgressComponent  },
-  { path : "home",                               component: HomeComponent  },
+  { path : "process/new",                        component: NewProcessComponent, canActivate: [AuthGuard] },
+  { path : "process/show/:id",                   component: ShowProcessComponent, canActivate: [AuthGuard] },
+  { path : "process/edit/:id",                   component: NewProcessComponent, canActivate: [AuthGuard] },
+  { path : "process/index",                      component: IndexProcessComponent, canActivate: [AuthGuard]  },
+  { path : "parties_involved/new",               component: NewPartiesInvoledComponent, canActivate: [AuthGuard] },
+  { path : "parties_involved/show/:id",          component: ShowPartiesInvoledComponent, canActivate: [AuthGuard] },
+  { path : "parties_involved/edit/:id",          component: NewPartiesInvoledComponent, canActivate: [AuthGuard] },
+  { path : "parties_involved/index",             component: IndexPartiesInvoledComponent, canActivate: [AuthGuard]  },
+  { path : "procedural_progress/new",            component: NewProceduralProgressComponent, canActivate: [AuthGuard] },
+  { path : "procedural_progress/show/:id",       component: ShowProceduralProgressComponent, canActivate: [AuthGuard] },
+  { path : "procedural_progress/edit/:id",       component: NewProceduralProgressComponent, canActivate: [AuthGuard] },
+  { path : "procedural_progress/index",          component: IndexProceduralProgressComponent, canActivate: [AuthGuard]  },
+  { path : "home",                               component: HomeComponent, canActivate: [AuthGuard] },
 ];

@@ -1,3 +1,58 @@
 <app-header></app-header>
 
-<p>index-process works!</p>
+<div class="container my-5">
+  <h2 class="text-primary-custom mb-3">Processos</h2>
+  <div class="d-flex gap-3 mb-4">
+    <a class="btn px-4 py-2"
+       style="background-color: #2b0033; color: white;"
+       [routerLink]="['/process/new']">
+      Cadastrar
+    </a>
+  </div>
+
+  <div *ngIf="loading">Carregando...</div>
+
+  <table *ngIf="!loading && processos.length > 0" class="table table-striped align-middle">
+    <thead>
+      <tr>
+        <th>Data de Abertura</th>
+        <th>Descrição</th>
+        <th>Status</th>
+        <th>Último Andamento</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let processo of processos">
+        <td>
+          <a [routerLink]="['/process/show', processo.id]">
+            {{ processo.dataAbertura | date: 'dd/MM/yyyy' }}
+          </a>
+        </td>
+        <td>{{ processo.descricaoCaso }}</td>
+        <td>{{ processo.status }}</td>
+        <td>{{ processo.andamentoProcessualDto?.descricao }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="mt-4 mb-5 d-flex justify-content-between align-items-center" *ngIf="totalPages > 1">
+    <button class="btn btn-outline-secondary"
+            (click)="previousPage()"
+            [disabled]="currentPage === 0">
+      ← Anterior
+    </button>
+
+    <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+
+    <button class="btn btn-outline-secondary"
+            (click)="nextPage()"
+            [disabled]="currentPage + 1 >= totalPages">
+      Próxima →
+    </button>
+  </div>
+
+  <div *ngIf="!loading && processos.length === 0" class="text-muted">
+    Nenhum processo cadastrado.
+  </div>
+
+</div>

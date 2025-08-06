@@ -39,24 +39,30 @@ export class LoginComponentComponent {
         email: this.formData.email,
         senha: this.formData.password
       }).subscribe({
-        next: res => {
+        next: () => {
           this.toastr.success('Cadastro realizado com sucesso!');
         },
         error: err => {
-          this.toastr.error('Erro no cadastro: ' + err.error?.message || err.message);
+          const mensagem = typeof err.error === 'string'
+            ? err.error
+            : err.error?.message || 'Erro no cadastro';
+          this.toastr.error(mensagem);
         }
       });
     } else {
       this.apiService.login({
-      email: this.formData.email,
-      senha: this.formData.password
+        email: this.formData.email,
+        senha: this.formData.password
       }).subscribe({
         next: res => {
           localStorage.setItem('token', res.token);
           this.toastr.success('Login realizado com sucesso!');
         },
         error: err => {
-          this.toastr.error('Erro no login: ' + err.error?.message || err.message);
+          const mensagem = typeof err.error === 'string'
+            ? err.error
+            : err.error?.message || 'Erro no login';
+          this.toastr.error(mensagem);
         }
       });
     }

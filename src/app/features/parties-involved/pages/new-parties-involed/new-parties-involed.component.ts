@@ -45,8 +45,6 @@ export class NewPartiesInvoledComponent implements OnInit {
       valorDocumento: ['', Validators.required]
     });
 
-    this.parteId = Number(this.route.snapshot.paramMap.get('id'));
-
     if (this.parteId) {
       this.api.get(`/partes-envolvidas/${this.parteId}`).subscribe({
         next: (data) => {
@@ -69,8 +67,7 @@ export class NewPartiesInvoledComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      const payload = {
-        id: this.parteId,
+      const payload: any = {
         nomeCompleto: this.form.value.nomeCompleto,
         tipoParteEnvolvida: this.form.value.tipoParteEnvolvida,
         email: this.form.value.email,
@@ -81,10 +78,12 @@ export class NewPartiesInvoledComponent implements OnInit {
         }
       };
 
-      const request = this.parteId
+      if (this.parteId && this.parteId > 0) {
+        payload.id = this.parteId;
+      }
+      const request = this.parteId && this.parteId > 0
         ? this.api.update(`/partes-envolvidas`, payload)
         : this.api.create(`/partes-envolvidas`, payload);
-
       request.subscribe({
         next: () => {
           this.toastr.success(

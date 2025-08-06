@@ -63,7 +63,7 @@ export class ShowPartiesInvoledComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/parties_involved']);
+    this.router.navigate(['/parties_involved/index']);
   }
 
 }

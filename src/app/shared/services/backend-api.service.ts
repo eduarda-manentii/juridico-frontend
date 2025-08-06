@@ -19,4 +19,8 @@ export class BackendApiService {
     return this.http.post(`${this.baseUrl}/usuarios/login`, data);
   }
 
+  logout() {
+    localStorage.removeItem('token');
+  }
+
 }

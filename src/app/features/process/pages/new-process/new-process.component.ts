@@ -135,10 +135,16 @@ export class NewProcessComponent implements OnInit {
           this.router.navigate(['/process/index']);
         },
         error: (err) => {
-          let mensagem = 'Erro ao salvar';
-          if (typeof err.error === 'string') mensagem = err.error;
-          else if (err.error?.message) mensagem = err.error.message;
-          else if (Array.isArray(err.error?.errors) && err.error.errors.length > 0) mensagem = err.error.errors[0];
+          let mensagem: string;
+          if (typeof err.error === 'string') {
+            mensagem = err.error;
+          } else if (err.error?.message) {
+            mensagem = err.error.message;
+          } else if (Array.isArray(err.error?.errors) && err.error.errors.length > 0) {
+            mensagem = err.error.errors[0];
+          } else {
+            mensagem = 'Erro ao salvar';
+          }
           this.toastr.error(mensagem);
         }
       });

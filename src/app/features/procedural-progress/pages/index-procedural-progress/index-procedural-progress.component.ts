@@ -55,16 +55,4 @@ export class IndexProceduralProgressComponent implements OnInit {
     }
   }
 
-  editar(id: number) {
-    this.router.navigate(['/procedural_progress/edit', id]);
-  }
-
-  excluir(id: number) {
-    if (confirm('Deseja excluir este andamento processual?')) {
-      this.api.delete(`/andamentos-processuais/${id}`).subscribe(() => {
-        this.loadData(this.currentPage);
-      });
-    }
-  }
-
 }

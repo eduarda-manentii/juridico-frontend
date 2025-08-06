@@ -55,8 +55,18 @@ export class ShowPartiesInvoledComponent implements OnInit {
           this.toastr.success('Parte envolvida excluída com sucesso!');
           this.router.navigate(['/parties_involved/index']);
         },
-        error: () => {
-          this.toastr.error('Erro ao excluir.');
+         error: (err) => {
+          let mensagem: string;
+          if (typeof err.error === 'string') {
+            mensagem = err.error;
+          } else if (err.error?.message) {
+            mensagem = err.error.message;
+          } else if (Array.isArray(err.error?.errors) && err.error.errors.length > 0) {
+            mensagem = err.error.errors[0];
+          } else {
+            mensagem = 'Erro ao salvar';
+          }
+          this.toastr.error(mensagem);
         }
       });
     }

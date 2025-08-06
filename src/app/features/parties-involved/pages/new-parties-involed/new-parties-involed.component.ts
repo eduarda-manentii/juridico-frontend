@@ -94,7 +94,6 @@ export class NewPartiesInvoledComponent implements OnInit {
           this.router.navigate(['/parties_involved/index']);
         },
         error: (err) => {
-          console.error('Erro da API:', err);
           let mensagem: string;
           if (typeof err.error === 'string') {
             mensagem = err.error;

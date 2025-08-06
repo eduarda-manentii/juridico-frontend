@@ -9,6 +9,7 @@ import { NewProcessComponent } from './features/process/pages/new-process/new-pr
 import { ShowPartiesInvoledComponent } from './features/parties-involved/pages/show-parties-involed/show-parties-involed.component';
 import { ShowProceduralProgressComponent } from './features/procedural-progress/pages/show-procedural-progress/show-procedural-progress.component';
 import { ShowProcessComponent } from './features/process/pages/show-process/show-process.component';
+import { HomeComponent } from './features/home/pages/home/home.component';
 
 export const routes: Routes = [
   { path: '',                                    redirectTo: 'login', pathMatch: 'full' },
@@ -25,4 +26,5 @@ export const routes: Routes = [
   { path : "procedural_progress/show/:id",       component: ShowProceduralProgressComponent },
   { path : "procedural_progress/edit/:id",       component: NewProceduralProgressComponent },
   { path : "procedural_progress/index",          component: IndexProceduralProgressComponent  },
+  { path : "home",                               component: HomeComponent  },
 ];

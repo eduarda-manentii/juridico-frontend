@@ -13,3 +13,24 @@
   border-color: #4a0055;
   color: #fff;
 }
+
+.navbar .nav-link.text-light {
+  color: #ffffff;
+  transition: color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.navbar .nav-link.text-light:hover {
+  color: #c0aaff;
+  transform: translateY(-3px);
+}
+
+.navbar .nav-link.text-danger {
+  transition: color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.navbar .nav-link.text-danger:hover {
+  color: #ff4c4c;
+  transform: translateY(-3px);
+}

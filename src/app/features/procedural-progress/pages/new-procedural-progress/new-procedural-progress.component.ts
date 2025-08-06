@@ -60,13 +60,14 @@ export class NewProceduralProgressComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      const payload = {
-        id: this.andamentoId,
+      const payload: any = {
         tipoAndamentoProcessual: this.form.value.tipoAndamentoProcessual,
         dataRegistro: this.form.value.dataRegistro,
         descricao: this.form.value.descricao
       };
-
+      if (this.andamentoId && this.andamentoId > 0) {
+        payload.id = this.andamentoId;
+      }
       const request = this.andamentoId
         ? this.api.update(`/andamentos-processuais`, payload)
         : this.api.create(`/andamentos-processuais`, payload);

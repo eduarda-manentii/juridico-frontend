@@ -1,0 +1,61 @@
+<app-header></app-header>
+
+<div class="container my-5" *ngIf="processo">
+  <h2 class="mb-4 text-secondary-custom">
+    Detalhes do Processo - Código {{ processo.id }}
+  </h2>
+
+  <dt class="col-sm-3">Data Abertura </dt>
+  <dd class="col-sm-9">{{ processo.dataAbertura | date:'dd/MM/yyyy' }}</dd>
+
+  <dt class="col-sm-3">Status</dt>
+  <dd class="col-sm-9">{{ processo.status }}</dd>
+
+  <dt class="col-sm-3">Descrição</dt>
+  <dd class="col-sm-9">{{ processo.descricaoCaso }}</dd>
+
+  <dt class="col-sm-3">Tipo Andamento Processual</dt>
+  <dd class="col-sm-9">{{ processo.andamentoProcessual.tipoAndamentoProcessual }}</dd>
+
+  <dt class="col-sm-3">Partes Envolvidas</dt>
+  <dd class="col-sm-9">
+    <ul class="list-group">
+      <li *ngFor="let parte of processo.partesEnvolvidas" class="list-group-item">
+        <strong>Código:</strong> {{ parte.id }}<br />
+        <strong>Nome:</strong> {{ parte.nomeCompleto }}<br />
+        <strong>Tipo:</strong> {{ parte.tipoParteEnvolvida }}
+      </li>
+    </ul>
+  </dd>
+
+  <button
+    *ngIf="processo.status != 'ARQUIVADO'"
+    class="btn px-4 py-2"
+    style="background-color: #2b0033; color: white;"
+    (click)="arquivar()">
+    Arquivar processo
+  </button>
+
+  <div class="d-flex gap-3 mt-4">
+    <button
+      class="btn px-4 py-2"
+      style="background-color: #2b0033; color: white;"
+      [routerLink]="['/process/edit', processo.id]">
+      Editar
+    </button>
+
+    <button
+      class="btn btn-danger px-4 py-2"
+      (click)="onDelete()">
+      Excluir
+    </button>
+
+    <button
+      class="btn btn-outline-secondary px-4 py-2"
+      (click)="goBack()">
+      Voltar
+    </button>
+
+    <app-confirm-modal (confirmed)="onConfirmedDeleted($event)"></app-confirm-modal>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<app-header></app-header>
+
+<div class="container py-5" *ngIf="form">
+  <h2 class="mb-4 text-secondary-custom">
+    {{ parteId ? 'Editar Parte Envolvida' : 'Cadastro de Parte Envolvida' }}
+  </h2>
+
+  <form [formGroup]="form">
+    <div class="row g-3 mb-3">
+      <div class="col-md-6">
+        <label class="form-label" [appRequiredMarker]="true">Nome Completo</label>
+        <input class="form-control" formControlName="nomeCompleto" type="text" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label" [appRequiredMarker]="true">Tipo Parte Envolvida</label>
+        <select class="form-select" formControlName="tipoParteEnvolvida">
+          <option value="">Selecione</option>
+          <option value="AUTOR">AUTOR</option>
+          <option value="REU">REU</option>
+          <option value="ADVOGADO">ADVOGADO</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-md-6">
+        <label class="form-label" [appRequiredMarker]="true">Email</label>
+        <input class="form-control" formControlName="email" type="email" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label" [appRequiredMarker]="true">Telefone</label>
+        <input class="form-control" formControlName="telefone" type="text" mask="(00) 00000-0000" />
+      </div>
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <label class="form-label" [appRequiredMarker]="true">Tipo Documento</label>
+        <select class="form-select" formControlName="tipoDocumento">
+          <option value="">Selecione</option>
+          <option value="CPF">CPF</option>
+          <option value="CNPJ">CNPJ</option>
+        </select>
+      </div>
+
+      <div class="col-md-8">
+        <label class="form-label" [appRequiredMarker]="true">Valor Documento</label>
+        <input class="form-control" formControlName="valorDocumento" type="text" />
+      </div>
+    </div>
+  </form>
+
+   <div class="d-flex gap-3">
+    <button
+      type="submit"
+      class="btn px-4 py-2"
+      style="background-color: #2b0033; color: white;"
+      (click)="onSubmit()">
+      Salvar
+    </button>
+
+    <button
+      type="button"
+      class="btn px-4 py-2"
+      style="background-color: transparent; color: #2b0033; border: 2px solid #2b0033;"
+      (click)="goBack()">
+      Cancelar
+    </button>
+  </div>
+</div>

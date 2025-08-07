@@ -1,0 +1,49 @@
+<app-header></app-header>
+
+<div class="container my-5" *ngIf="parte">
+  <h2 class="mb-4 text-secondary-custom">
+    Detalhes da Parte Envolvida {{ parte.id }}
+  </h2>
+
+  
+  <dt class="col-sm-3">Nome </dt>
+  <dd class="col-sm-9">{{ parte.nomeCompleto }}</dd>
+
+  <dt class="col-sm-3">Tipo Parte Envolvida</dt>
+  <dd class="col-sm-9">{{ parte.tipoParteEnvolvida }}</dd>
+
+  <dt class="col-sm-3">Email</dt>
+  <dd class="col-sm-9">{{ parte.email }}</dd>
+  
+  <dt class="col-sm-3">Telefone </dt>
+  <dd class="col-sm-9">{{ parte.telefone }}</dd>
+
+  <dt class="col-sm-3">Tipo Documento</dt>
+  <dd class="col-sm-9">{{ parte.documento?.tipoDocumento }}</dd>
+
+  <dt class="col-sm-3">Documento</dt>
+  <dd class="col-sm-9">{{ parte.documento?.valor }}</dd>
+  
+  <div class="d-flex gap-3 mt-4">
+    <button
+      class="btn px-4 py-2"
+      style="background-color: #2b0033; color: white;"
+      [routerLink]="['/parties_involved/edit', parte.id]">
+      Editar
+    </button>
+
+    <button
+      class="btn btn-danger px-4 py-2"
+      (click)="onDelete()">
+     Excluir
+    </button>
+
+     <button
+      class="btn btn-outline-secondary px-4 py-2"
+      (click)="goBack()">
+      Voltar
+    </button>
+
+    <app-confirm-modal (confirmed)="onConfirmed($event)"></app-confirm-modal>
+  </div>
+</div>

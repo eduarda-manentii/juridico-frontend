@@ -1,0 +1,22 @@
+$purple-dark: #4c2f86;
+$purple-light: #6a5acd;
+
+.bg-purple {
+  background-color: $purple-dark !important;
+}
+
+.text-purple {
+  color: $purple-dark !important;
+}
+
+.hero {
+  background: linear-gradient(135deg, $purple-dark, $purple-light);
+}
+
+.btn-outline-light {
+  border-width: 2px;
+}
+
+.card {
+  border-radius: 1rem;
+}

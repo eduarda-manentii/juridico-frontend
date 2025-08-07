@@ -1,0 +1,39 @@
+<app-header></app-header>
+
+<div class="container my-5" *ngIf="andamento">
+  <h2 class="mb-4 text-secondary-custom">
+    Detalhes do Andamento Processual {{ andamento.id }}
+  </h2>
+
+  <dt class="col-sm-3">Tipo </dt>
+  <dd class="col-sm-9">{{ andamento.tipoAndamentoProcessual }}</dd>
+
+  <dt class="col-sm-3">Data de Registro</dt>
+  <dd class="col-sm-9">{{ andamento.dataRegistro }}</dd>
+
+  <dt class="col-sm-3">Descrição</dt>
+  <dd class="col-sm-9">{{ andamento.descricao }}</dd>
+
+  <div class="d-flex gap-3 mt-4">
+    <button
+      class="btn px-4 py-2"
+      style="background-color: #2b0033; color: white;"
+      [routerLink]="['/procedural_progress/edit', andamento.id]">
+      Editar
+    </button>
+
+    <button
+      class="btn btn-danger px-4 py-2"
+      (click)="onDelete()">
+      Excluir
+    </button>
+
+    <button
+      class="btn btn-outline-secondary px-4 py-2"
+      (click)="goBack()">
+      Voltar
+    </button>
+
+    <app-confirm-modal (confirmed)="onConfirmed($event)"></app-confirm-modal>
+  </div>
+</div>

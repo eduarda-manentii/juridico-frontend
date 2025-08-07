@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-center align-items-center vh-100 bg-dark-purple">
+  <div class="card phone-card p-4">
+    <div class="text-center mb-4">
+      <img src="assets/images/logo_attus.jpeg" alt="Logo" class="logo-img mb-2">
+      <h4 *ngIf="!isRegisterMode">entrar</h4>
+      <h4 *ngIf="isRegisterMode">cadastro</h4>
+    </div>
+
+    <form (ngSubmit)="onSubmit()">
+      <div *ngIf="isRegisterMode" class="mb-3">
+        <input type="text" class="form-control" placeholder="Nome"
+               [(ngModel)]="formData.name" name="name" required>
+      </div>
+
+      <div class="mb-3">
+        <input type="email" class="form-control" placeholder="Email"
+               [(ngModel)]="formData.email" name="email" required>
+      </div>
+
+      <div class="mb-3">
+        <input type="password" class="form-control" placeholder="Senha"
+               [(ngModel)]="formData.password" name="password" required>
+      </div>
+
+      <button type="submit" class="btn btn-purple w-100 mb-2">
+        {{ isRegisterMode ? 'Cadastrar' : 'Entrar' }}
+      </button>
+    </form>
+
+    <div class="text-center">
+      <small class="text-primary" role="button" (click)="toggleMode()">
+        {{ isRegisterMode ? 'Já tem conta? Entrar' : 'Não tem conta? Cadastre-se' }}
+      </small>
+    </div>
+  </div>
+</div>

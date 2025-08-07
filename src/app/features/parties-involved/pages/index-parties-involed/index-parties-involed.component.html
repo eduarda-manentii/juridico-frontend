@@ -1,0 +1,57 @@
+<app-header></app-header>
+
+<div class="container my-5">
+  <h2 class="text-primary-custom mb-3">Partes Envolvidas</h2>
+  <div class="d-flex gap-3 mb-4">
+    <a class="btn px-4 py-2"
+       style="background-color: #2b0033; color: white;"
+       [routerLink]="['/parties_involved/new']">
+      Cadastrar
+    </a>
+  </div>
+
+  <div *ngIf="loading">Carregando...</div>
+
+ <table *ngIf="!loading && partesEnvolvidas.length > 0" class="table table-striped align-middle">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Tipo Parte Envolvida</th>
+      <th>Tipo Documento</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let parte of partesEnvolvidas">
+      <td>
+        <a [routerLink]="['/parties_involved/show', parte.id]">
+          {{ parte.nomeCompleto }}
+        </a>
+      </td>
+      <td>{{ parte.tipoParteEnvolvida }}</td>
+      <td>{{ parte.documento?.tipoDocumento }}</td>
+      <td>{{ parte.email }}</td>
+    </tr>
+  </tbody>
+</table>
+
+  <div class="mt-4 mb-5 d-flex justify-content-between align-items-center" *ngIf="totalPages > 1">
+    <button class="btn btn-outline-secondary"
+            (click)="previousPage()"
+            [disabled]="currentPage === 0">
+      ← Anterior
+    </button>
+
+    <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+
+    <button class="btn btn-outline-secondary"
+            (click)="nextPage()"
+            [disabled]="currentPage + 1 >= totalPages">
+      Próxima →
+    </button>
+  </div>
+
+  <div *ngIf="!loading && partesEnvolvidas.length === 0" class="text-muted">
+    Nenhuma parte envolvida cadastrada.
+  </div>
+</div>

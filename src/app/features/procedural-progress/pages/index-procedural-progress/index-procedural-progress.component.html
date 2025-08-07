@@ -1,0 +1,57 @@
+
+<app-header></app-header>
+
+<div class="container my-5">
+  <h2 class="text-primary-custom mb-3">Andamentos Processuais</h2>
+  <div class="d-flex gap-3 mb-4">
+    <a class="btn px-4 py-2"
+       style="background-color: #2b0033; color: white;"
+       [routerLink]="['/procedural_progress/new']">
+      Cadastrar
+    </a>
+  </div>
+
+  <div *ngIf="loading">Carregando...</div>
+
+  <table *ngIf="!loading && andamentos.length > 0" class="table table-striped align-middle">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+        <th>Data</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let andamento of andamentos">
+        <td>
+          <a [routerLink]="['/procedural_progress/show', andamento.id]">
+            {{ andamento.descricao }}
+          </a>
+        </td>
+        <td>{{ andamento.dataRegistro | date:'dd/MM/yyyy' }}</td>
+        <td>{{ andamento.tipoAndamentoProcessual }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="mt-4 mb-5 d-flex justify-content-between align-items-center" *ngIf="totalPages > 1">
+    <button class="btn btn-outline-secondary"
+            (click)="previousPage()"
+            [disabled]="currentPage === 0">
+      ← Anterior
+    </button>
+
+    <span>Página {{ currentPage + 1 }} de {{ totalPages }}</span>
+
+    <button class="btn btn-outline-secondary"
+            (click)="nextPage()"
+            [disabled]="currentPage + 1 >= totalPages">
+      Próxima →
+    </button>
+  </div>
+
+  <div *ngIf="!loading && andamentos.length === 0" class="text-muted">
+    Nenhum andamento processual cadastrado.
+  </div>
+
+</div>

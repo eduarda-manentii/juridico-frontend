@@ -23,7 +23,7 @@
 
   <dt class="col-sm-3">Documento</dt>
   <dd class="col-sm-9">{{ parte.documento?.valor }}</dd>
-  
+
   <div class="d-flex gap-3 mt-4">
     <button
       class="btn px-4 py-2"
@@ -38,8 +38,10 @@
      Excluir
     </button>
 
-     <button
-      class="btn btn-outline-secondary px-4 py-2"
+    <button
+      type="button"
+      class="btn px-4 py-2"
+      style="background-color: transparent; color: #2b0033; border: 2px solid #2b0033;"
       (click)="goBack()">
       Voltar
     </button>

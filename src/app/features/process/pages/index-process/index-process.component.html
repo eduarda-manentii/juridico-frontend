@@ -8,6 +8,11 @@
        [routerLink]="['/process/new']">
       Cadastrar
     </a>
+    <a class="btn px-4 py-2"
+       style="background-color: #2b0033; color: white;"
+       (click)="openFilter()">
+      Filtrar
+    </a>
   </div>
 
   <div *ngIf="loading">Carregando...</div>
@@ -54,5 +59,4 @@
   <div *ngIf="!loading && processos.length === 0" class="text-muted">
     Nenhum processo cadastrado.
   </div>
-
 </div>

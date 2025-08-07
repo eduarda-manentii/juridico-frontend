@@ -74,9 +74,7 @@ export class NewProcessComponent implements OnInit {
             descricaoCaso: data.descricaoCaso,
             status: data.status,
             andamentoProcessual: data.andamentoProcessual?.id || '',
-            partesEnvolvidas: data.partesEnvolvidas?.length
-              ? data.partesEnvolvidas[0].id
-              : ''
+            partesEnvolvidas: data.partesEnvolvidas ? data.partesEnvolvidas.map((p: any) => p.id) : []
           });
         },
         error: () => {

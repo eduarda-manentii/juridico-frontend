@@ -1,0 +1,27 @@
+<div class="modal-backdrop" (click)="close()"></div>
+<div class="modal-content p-4">
+  <h5>Filtrar Processos</h5>
+  <form [formGroup]="form" (ngSubmit)="applyFilter()">
+    <div class="mb-3">
+      <label>Data Abertura</label>
+      <input type="date" formControlName="dataAbertura" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label>Documento</label>
+      <input type="text" formControlName="documento" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label>Status</label>
+      <select formControlName="status" class="form-select">
+        <option value="">Todos</option>
+        <option value="ATIVO">ATIVO</option>
+        <option value="SUSPENSO">SUSPENSO</option>
+        <option value="ARQUIVADO">ARQUIVADO</option>
+      </select>
+    </div>
+    <div class="d-flex justify-content-end gap-2">
+      <button type="button" class="btn btn-secondary" (click)="close()">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Aplicar</button>
+    </div>
+  </form>
+</div>

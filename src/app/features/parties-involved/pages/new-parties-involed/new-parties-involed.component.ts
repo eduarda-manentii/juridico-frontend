@@ -45,24 +45,29 @@ export class NewPartiesInvoledComponent implements OnInit {
       valorDocumento: ['', Validators.required]
     });
 
-    if (this.parteId) {
-      this.api.get(`/partes-envolvidas/${this.parteId}`).subscribe({
-        next: (data) => {
-          this.form.patchValue({
-            nomeCompleto: data.nomeCompleto,
-            tipoParteEnvolvida: data.tipoParteEnvolvida,
-            email: data.email,
-            telefone: data.telefone,
-            tipoDocumento: data.documento?.tipoDocumento,
-            valorDocumento: data.documento?.valor
-          });
-        },
-        error: () => {
-          this.toastr.error('Erro ao carregar dados da parte envolvida.');
-          this.router.navigate(['/parties_involved/index']);
-        }
-      });
-    }
+    this.route.paramMap.subscribe((params) => {
+      const idParam = params.get('id');
+      this.parteId = idParam ? +idParam : null;
+
+      if (this.parteId) {
+        this.api.get(`/partes-envolvidas/${this.parteId}`).subscribe({
+          next: (data) => {
+            this.form.patchValue({
+              nomeCompleto: data.nomeCompleto,
+              tipoParteEnvolvida: data.tipoParteEnvolvida,
+              email: data.email,
+              telefone: data.telefone,
+              tipoDocumento: data.documento?.tipoDocumento,
+              valorDocumento: data.documento?.valor
+            });
+          },
+          error: () => {
+            this.toastr.error('Erro ao carregar dados da parte envolvida.');
+            this.router.navigate(['/parties_involved/index']);
+          }
+        });
+      }
+    });
   }
 
   onSubmit() {

@@ -71,7 +71,7 @@ export class NewProcessComponent implements OnInit {
         next: (data: any) => {
           this.form.patchValue({
             dataAbertura: data.dataAbertura,
-            descricaoCaso: data.descricaoCaso,
+            descricao: data.descricaoCaso,
             status: data.status,
             andamentoProcessual: data.andamentoProcessual?.id || '',
             partesEnvolvidas: data.partesEnvolvidas ? data.partesEnvolvidas.map((p: any) => p.id) : []

@@ -15,6 +15,10 @@ export class BackendApiService {
     return this.http.post<any>(`${this.baseUrl}/usuarios`, data, { responseType: 'text' as 'json' });
   }
 
+  patch(endpoint: string, params?: any): Observable<any> {
+    return this.http.patch(`${this.baseUrl}${endpoint}`, { params });
+  }
+
   get(endpoint: string, params?: any): Observable<any> {
     return this.http.get(`${this.baseUrl}${endpoint}`, { params });
   }

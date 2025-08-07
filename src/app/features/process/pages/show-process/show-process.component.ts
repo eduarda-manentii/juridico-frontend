@@ -37,6 +37,31 @@ export class ShowProcessComponent implements OnInit {
     });
   }
 
+  arquivar() {
+    if (this.processo?.id) {
+      this.api.patch(`/processos/${this.processo.id}/arquivar`).subscribe({
+        next: () => {
+          this.toastr.success('Processo arquivado com sucesso!');
+          window.location.reload();
+        },
+        error: (err) => {
+          let mensagem: string;
+          if (typeof err.error === 'string') {
+            mensagem = err.error;
+          } else if (err.error?.message) {
+            mensagem = err.error.message;
+          } else if (Array.isArray(err.error?.errors) && err.error.errors.length > 0) {
+            mensagem = err.error.errors[0];
+          } else {
+            mensagem = 'Erro ao arquivar um processo.';
+          }
+          this.toastr.error(mensagem);
+        }
+      });
+
+    }
+  }
+
   goBack() {
     this.router.navigate(['/process/index']);
   }
@@ -45,7 +70,7 @@ export class ShowProcessComponent implements OnInit {
     this.confirmModal.open('Tem certeza que deseja excluir este processo?');
   }
 
-  onConfirmed(result: boolean) {
+  onConfirmedDeleted(result: boolean) {
     if (result && this.processo?.id) {
       this.api.delete(`/processos/${this.processo.id}`).subscribe({
         next: () => {

@@ -48,28 +48,28 @@ export class ShowProceduralProgressComponent implements OnInit {
   }
 
   onConfirmed(result: boolean) {
-    if (result && this.andamento?.id) {
-      this.api.delete(`/andamentos-processuais/${this.andamento.id}`).subscribe({
-        next: () => {
-          this.toastr.success('Andamento processual excluído com sucesso!');
-          this.router.navigate(['/procedural_progress/index']);
-        },
-        error: (err) => {
-          let mensagem: string;
-          if (typeof err.error === 'string') {
-            mensagem = err.error;
-          } else if (err.error?.message) {
-            mensagem = err.error.message;
-          } else if (Array.isArray(err.error?.errors) && err.error.errors.length > 0) {
-            mensagem = err.error.errors[0];
-          } else {
-            mensagem = 'Erro ao excluir andamento processual.';
-          }
-          this.toastr.error(mensagem);
+  if (result && this.andamento?.id) {
+    this.api.delete(`/andamentos-processuais/${this.andamento.id}`).subscribe({
+      next: () => {
+        this.toastr.success('Andamento processual excluído com sucesso!');
+        this.router.navigate(['/procedural_progress/index']);
+      },
+      error: (err) => {
+        let mensagem: string;
+        if (typeof err.error === 'string') {
+          mensagem = err.error;
+        } else if (err.error?.message) {
+          mensagem = err.error.message;
+        } else if (Array.isArray(err.error?.errors) && err.error.errors.length > 0) {
+          mensagem = err.error.errors[0];
+        } else {
+          mensagem = 'Erro ao excluir andamento processual.';
         }
-      });
-    }
+        this.toastr.error(mensagem);
+      }
+    });
   }
+}
 
   goBack() {
     this.router.navigate(['/procedural_progress/index']);

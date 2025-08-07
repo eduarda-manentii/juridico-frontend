@@ -60,3 +60,9 @@
     Nenhum processo cadastrado.
   </div>
 </div>
+
+<app-filter-modal
+  *ngIf="showFilterModal"
+  (applied)="onFilterApplied($event)"
+  (closed)="onFilterClosed()">
+</app-filter-modal>

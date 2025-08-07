@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs'
 
 @Injectable({
@@ -11,24 +11,15 @@ export class BackendApiService {
 
   constructor(private http: HttpClient) {}
 
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+  }
+
   register(data: { nome: string; email: string; senha: string }): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/usuarios`, data, { responseType: 'text' as 'json' });
-  }
-
-  get(endpoint: string, params?: any): Observable<any> {
-    return this.http.get(`${this.baseUrl}${endpoint}`, { params });
-  }
-
-  delete(endpoint: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}${endpoint}`, { responseType: 'text' });
-  }
-
-  create(endpoint: string, data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}${endpoint}`, data, { responseType: 'text' as 'json' });
-  }
-
-  update(endpoint: string, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}${endpoint}`, data, { responseType: 'text' as 'json' });
   }
 
   login(data: { email: string; senha: string }): Observable<any> {
@@ -37,6 +28,26 @@ export class BackendApiService {
 
   logout() {
     localStorage.removeItem('token');
+  }
+
+  get(endpoint: string, params?: any): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.baseUrl}${endpoint}`, { headers, params });
+  }
+
+  delete(endpoint: string): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.baseUrl}${endpoint}`, { headers, responseType: 'text' });
+  }
+
+  create(endpoint: string, data: any): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.post(`${this.baseUrl}${endpoint}`, data, { headers, responseType: 'text' as 'json' });
+  }
+
+  update(endpoint: string, data: any): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.put(`${this.baseUrl}${endpoint}`, data, { headers, responseType: 'text' as 'json' });
   }
 
 }

@@ -6,47 +6,50 @@
   </h2>
 
   <form [formGroup]="form">
-    <div class="row g-3 mb-3">
-      <div class="col-md-4">
+    <div class="row g-3 mb-6">
+      <div class="col-md-6">
         <label class="form-label" [appRequiredMarker]="true">Data de Abertura</label>
         <input class="form-control" type="date" formControlName="dataAbertura" />
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label class="form-label" [appRequiredMarker]="true">Status</label>
         <select class="form-select" formControlName="status">
           <option value="">Selecione</option>
           <option value="ATIVO">ATIVO</option>
-          <option value="ENCERRADO">ENCERRADO</option>
+          <option value="SUSPENSO">SUSPENSO</option>
           <option value="ARQUIVADO">ARQUIVADO</option>
         </select>
       </div>
-      <div class="col-md-4">
-        <label class="form-label" [appRequiredMarker]="true">Descrição do Caso</label>
-        <input class="form-control" type="text" formControlName="descricaoCaso" />
-      </div>
     </div>
 
-<div class="row g-3 mb-3">
-  <div class="col-md-6">
-    <label class="form-label" [appRequiredMarker]="true">Andamento Processual</label>
-    <select class="form-select" formControlName="andamentoProcessualId">
-      <option value="">Selecione</option>
-      <option *ngFor="let andamento of andamentosDisponiveis" [value]="andamento.id">
-        {{ andamento.tipoAndamentoProcessual }} - {{ andamento.descricao }} ({{ andamento.dataRegistro | date: 'dd/MM/yyyy' }})
-      </option>
-    </select>
-  </div>
+  <div class="row g-3 mb-3">
+    <div class="col-md-12">
+      <label class="form-label" [appRequiredMarker]="true">Andamento Processual</label>
+      <select class="form-select" formControlName="andamentoProcessual">
+        <option value="">Selecione</option>
+        <option *ngFor="let andamento of andamentosDisponiveis" [value]="andamento.id">
+          {{ andamento.tipoAndamentoProcessual }} - {{ andamento.descricao }} ({{ andamento.dataRegistro | date: 'dd/MM/yyyy' }})
+        </option>
+      </select>
+    </div>
 
-  <div class="col-md-6">
-    <label class="form-label" [appRequiredMarker]="true">Parte Envolvida</label>
-    <select class="form-select" formControlName="parteEnvolvidaId">
-      <option value="">Selecione</option>
+    <label class="form-label" [appRequiredMarker]="true">Partes Envolvidas</label>
+    <select
+      class="form-select"
+      formControlName="partesEnvolvidas"
+      multiple
+      size="5"
+    >
       <option *ngFor="let parte of partesDisponiveis" [value]="parte.id">
-        {{ parte.nomeCompleto }} ({{ parte.tipoParteEnvolvida }}) - {{ parte.documento.tipoDocumento}}: {{ parte.documento.valor }}
+        {{ parte.nomeCompleto }} ({{ parte.tipoParteEnvolvida }}) - {{ parte.documento.tipoDocumento }}: {{ parte.documento.valor }}
       </option>
     </select>
+    
+    <div class="mb-4">
+      <label class="form-label" [appRequiredMarker]="true">Descrição</label>
+      <textarea class="form-control" formControlName="descricao" rows="4"></textarea>
+    </div>
   </div>
-</div>
 
     <div class="d-flex gap-3 mt-4">
       <button

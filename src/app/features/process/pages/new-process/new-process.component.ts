@@ -16,7 +16,6 @@ interface Parte {
     tipoDocumento: string ,
     valor: string
   };
-
 }
 
 interface Andamento {
@@ -59,7 +58,7 @@ export class NewProcessComponent implements OnInit {
       descricaoCaso: ['', Validators.required],
       status: ['', Validators.required],
       andamentoProcessual: ['', Validators.required],
-      parteEnvolvidas: [[], Validators.required]
+      partesEnvolvidas: [[], Validators.required]
     });
 
     this.processId = Number(this.route.snapshot.paramMap.get('id'));
@@ -89,36 +88,44 @@ export class NewProcessComponent implements OnInit {
   }
 
   private loadPartesDisponiveis() {
-  this.api.get('/partes-envolvidas').subscribe({
-    next: (data: any) => {
-      this.partesDisponiveis = Array.isArray(data.content) ? data.content : [];
-    },
-    error: () => {
-      this.toastr.error('Erro ao carregar partes disponíveis.');
-    }
-  });
-}
+    this.api.get('/partes-envolvidas').subscribe({
+      next: (data: any) => {
+        this.partesDisponiveis = Array.isArray(data.content) ? data.content : [];
+      },
+      error: () => {
+        this.toastr.error('Erro ao carregar partes disponíveis.');
+      }
+    });
+  }
 
   private loadAndamentosDisponiveis() {
-  this.api.get('/andamentos-processuais').subscribe({
-    next: (data: any) => {
-      console.log('andamentos recebidos:', data);
-      this.andamentosDisponiveis = Array.isArray(data.content) ? data.content : [];
-    },
-    error: () => {
-      this.toastr.error('Erro ao carregar andamentos processuais.');
-    }
-  });
-}
+    this.api.get('/andamentos-processuais').subscribe({
+      next: (data: any) => {
+        this.andamentosDisponiveis = Array.isArray(data.content) ? data.content : [];
+      },
+      error: () => {
+        this.toastr.error('Erro ao carregar andamentos processuais.');
+      }
+    });
+  }
 
   onSubmit() {
     if (this.form.valid) {
+      const andamentoId = this.form.value.andamentoProcessual;
+      const andamentoObj = this.andamentosDisponiveis.find(a => a.id === Number(andamentoId));
+
+      const partesIds = this.form.value.partesEnvolvidas;
+      const partesArray = Array.isArray(partesIds) ? partesIds : [partesIds];
+      const partesObjs = partesArray
+        .map((id: any) => this.partesDisponiveis.find(p => p.id === Number(id)))
+        .filter(p => p !== undefined);
+
       const payload = {
         dataAbertura: this.form.value.dataAbertura,
         descricaoCaso: this.form.value.descricaoCaso,
         status: this.form.value.status,
-        andamentoProcessual: this.form.value.andamentoProcessual,
-        partesEnvolvidas: this.form.value.partesEnvolvidas
+        andamentoProcessual: andamentoObj,
+        partesEnvolvidas: partesObjs
       };
 
       const request = this.processId

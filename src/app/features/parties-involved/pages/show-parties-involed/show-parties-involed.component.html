@@ -5,13 +5,25 @@
     Detalhes da Parte Envolvida {{ parte.id }}
   </h2>
 
-  <p><strong>Nome:</strong> {{ parte.nomeCompleto }}</p>
-  <p><strong>Tipo Parte Envolvida:</strong> {{ parte.tipoParteEnvolvida }}</p>
-  <p><strong>Email:</strong> {{ parte.email }}</p>
-  <p><strong>Telefone:</strong> {{ parte.telefone }}</p>
-  <p><strong>Tipo Documento:</strong> {{ parte.documento?.tipoDocumento }}</p>
-  <p><strong>Documento:</strong> {{ parte.documento?.valor }}</p>
+  
+  <dt class="col-sm-3">Nome </dt>
+  <dd class="col-sm-9">{{ parte.nomeCompleto }}</dd>
 
+  <dt class="col-sm-3">Tipo Parte Envolvida</dt>
+  <dd class="col-sm-9">{{ parte.tipoParteEnvolvida }}</dd>
+
+  <dt class="col-sm-3">Email</dt>
+  <dd class="col-sm-9">{{ parte.email }}</dd>
+  
+  <dt class="col-sm-3">Telefone </dt>
+  <dd class="col-sm-9">{{ parte.telefone }}</dd>
+
+  <dt class="col-sm-3">Tipo Documento</dt>
+  <dd class="col-sm-9">{{ parte.documento?.tipoDocumento }}</dd>
+
+  <dt class="col-sm-3">Documento</dt>
+  <dd class="col-sm-9">{{ parte.documento?.valor }}</dd>
+  
   <div class="d-flex gap-3 mt-4">
     <button
       class="btn px-4 py-2"

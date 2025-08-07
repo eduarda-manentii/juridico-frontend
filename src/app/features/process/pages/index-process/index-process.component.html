@@ -15,22 +15,22 @@
   <table *ngIf="!loading && processos.length > 0" class="table table-striped align-middle">
     <thead>
       <tr>
+        <th>Código</th>
         <th>Data de Abertura</th>
         <th>Descrição</th>
         <th>Status</th>
-        <th>Último Andamento</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let processo of processos">
         <td>
           <a [routerLink]="['/process/show', processo.id]">
-            {{ processo.dataAbertura | date: 'dd/MM/yyyy' }}
+            {{ processo.id }}
           </a>
         </td>
+        <td>{{ processo.dataAbertura | date: 'dd/MM/yyyy' }}</td>
         <td>{{ processo.descricaoCaso }}</td>
         <td>{{ processo.status }}</td>
-        <td>{{ processo.andamentoProcessualDto?.descricao }}</td>
       </tr>
     </tbody>
   </table>

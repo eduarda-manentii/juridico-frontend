@@ -5,9 +5,14 @@
     Detalhes do Andamento Processual {{ andamento.id }}
   </h2>
 
-  <p><strong>Tipo:</strong> {{ andamento.tipoAndamentoProcessual }}</p>
-  <p><strong>Data de Registro:</strong> {{ andamento.dataRegistro }}</p>
-  <p><strong>Descrição:</strong> {{ andamento.descricao }}</p>
+  <dt class="col-sm-3">Tipo </dt>
+  <dd class="col-sm-9">{{ andamento.tipoAndamentoProcessual }}</dd>
+
+  <dt class="col-sm-3">Data de Registro</dt>
+  <dd class="col-sm-9">{{ andamento.dataRegistro }}</dd>
+
+  <dt class="col-sm-3">Descrição</dt>
+  <dd class="col-sm-9">{{ andamento.descricao }}</dd>
 
   <div class="d-flex gap-3 mt-4">
     <button

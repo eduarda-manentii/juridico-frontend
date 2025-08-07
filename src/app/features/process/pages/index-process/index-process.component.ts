@@ -22,7 +22,10 @@ export class IndexProcessComponent implements OnInit {
   currentPage = 0;
   loading = true;
 
-  constructor(private api: BackendApiService, private router: Router) {}
+  constructor(
+    private api: BackendApiService, 
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadData(0);
@@ -53,31 +56,6 @@ export class IndexProcessComponent implements OnInit {
   nextPage() {
     if (this.currentPage + 1 < this.totalPages) {
       this.loadData(this.currentPage + 1);
-    }
-  }
-
-  editar(id: number) {
-    this.router.navigate(['/process/edit', id]);
-  }
-
-  excluir(id: number) {
-    if (confirm('Deseja excluir este processo?')) {
-      this.api.delete(`/processos/${id}`).subscribe({
-        next: () => {
-          this.loadData(this.currentPage);
-        },
-        error: (err) => {
-          let mensagem: string;
-          if (typeof err.error === 'string') {
-            mensagem = err.error;
-          } else if (err.error?.message) {
-            mensagem = err.error.message;
-          } else {
-            mensagem = 'Erro ao excluir processo.';
-          }
-          alert(mensagem);
-        }
-      });
     }
   }
 
